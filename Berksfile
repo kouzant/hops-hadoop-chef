@@ -3,9 +3,9 @@ source 'https://supermarket.chef.io'
 
 
 cookbook 'java'
-cookbook 'kagent', github: "karamelchef/kagent-chef", branch: "master"
-cookbook 'ndb', github: "hopshadoop/ndb-chef", branch: "master"
-cookbook 'conda', github: "hopshadoop/conda-chef", branch: "master"
+cookbook 'kagent', github: "AlexHopsworks/kagent-chef", branch: "local"
+cookbook 'ndb', github: "AlexHopsworks/ndb-chef", branch: "local"
+cookbook 'conda', github: "AlexHopsworks/conda-chef", branch: "local"
 
 cookbook 'magic_shell'
 cookbook 'sysctl', '~> 0.10.0'
