@@ -73,7 +73,6 @@ action :put_as_superuser do
 
 end
 
-
 action :create_as_superuser do
   Chef::Log.info "Creating hdfs directory: #{@new_resource.name}"
 
@@ -82,24 +81,33 @@ action :create_as_superuser do
       recursive=""
   end
 
-  bash "mk-dir-#{new_resource.name}" do
+  execute "mk-dir=#{new_resource.name}" do
     user node.hops.hdfs.user
     group node.hops.group
-    retries 1
-    code <<-EOF
-     . #{node.hops.base_dir}/sbin/set-env.sh
-     #{node.hops.base_dir}/bin/hdfs dfs -mkdir #{recursive} #{new_resource.name}
-     if [ $? -ne 0 ] ; then 
-        sleep 10
-        #{node.hops.base_dir}/bin/hdfs dfs -mkdir #{recursive} #{new_resource.name}
-     fi
-     #{node.hops.base_dir}/bin/hdfs dfs -chown #{new_resource.owner} #{new_resource.name}
-     #{node.hops.base_dir}/bin/hdfs dfs -chgrp #{new_resource.group} #{new_resource.name}
-     if [ "#{new_resource.mode}" != "" ] ; then
-        #{node.hops.base_dir}/bin/hadoop fs -chmod #{new_resource.mode} #{new_resource.name} 
-     fi
-    EOF
-  not_if "su #{node.hops.hdfs.user} -c \". #{node.hops.base_dir}/sbin/set-env.sh && #{node.hops.base_dir}/bin/hdfs dfs -test -d #{new_resource.name}\""
+    command 'su #{node.hops.hdfs.user} -c \"#{Chef::Config[:file_cache_patch]}/create_as_superuser.sh #{new_resource.name} #{new_resource.owner} #{new_resource.group} #{new_resource.mode} #{recursive}\"'
+
+    not_if "su #{node.hops.hdfs.user} -c \". #{node.hops.base_dir}/sbin/set-env.sh && #{node.hops.base_dir}/bin/hdfs dfs -test -d #{new_resource.name}\""
   end
+
+  
+  # bash "mk-dir-#{new_resource.name}" do
+  #   user node.hops.hdfs.user
+  #   group node.hops.group
+  #   retries 1
+  #   code <<-EOF
+  #    . #{node.hops.base_dir}/sbin/set-env.sh
+  #    #{node.hops.base_dir}/bin/hdfs dfs -mkdir #{recursive} #{new_resource.name}
+  #    if [ $? -ne 0 ] ; then 
+  #       sleep 10
+  #       #{node.hops.base_dir}/bin/hdfs dfs -mkdir #{recursive} #{new_resource.name}
+  #    fi
+  #    #{node.hops.base_dir}/bin/hdfs dfs -chown #{new_resource.owner} #{new_resource.name}
+  #    #{node.hops.base_dir}/bin/hdfs dfs -chgrp #{new_resource.group} #{new_resource.name}
+  #    if [ "#{new_resource.mode}" != "" ] ; then
+  #       #{node.hops.base_dir}/bin/hadoop fs -chmod #{new_resource.mode} #{new_resource.name} 
+  #    fi
+  #   EOF
+  # not_if "su #{node.hops.hdfs.user} -c \". #{node.hops.base_dir}/sbin/set-env.sh && #{node.hops.base_dir}/bin/hdfs dfs -test -d #{new_resource.name}\""
+  # end
  
 end

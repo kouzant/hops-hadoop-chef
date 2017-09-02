@@ -271,6 +271,15 @@ template "#{node.hops.home}/etc/hadoop/hadoop-metrics2.properties" do
   action :create_if_missing
 end
 
+# TODO: TEST THIS SHIT!!!
+template "#{Chef::Config[:file_cache_path]}/create_as_superuser.sh" do
+  source "create_as_superuser.sh.erb"
+  owner node.hops.hdfs.user
+  group node.hops.group
+  mode "755"
+  action :create_if_missing
+end
+
 link "#{node.hops.base_dir}/lib/native/libhopsnvml-#{node.hops.libhopsnvml_version}.so" do
   owner node['hops']['hdfs']['user']
   group node['hops']['group']
