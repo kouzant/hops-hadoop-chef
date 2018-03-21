@@ -42,7 +42,7 @@ default['hops']['hdfs']['user_home']           = "/user"
 default['hops']['hdfs']['blocksize']           = "134217728"
 default['hops']['hdfs']['umask']               = "0022"
 
-default['hops']['url']['primary']              = node['download_url'] + "/hops-" + node['hops']['version'] + ".tgz"
+default['hops']['url']['primary']              = node['download_url'] + "/antonis/hops-" + node['hops']['version'] + ".tgz"
 default['hops']['url']['secondary']            = "https://www.hops.site/hops-" + node['hops']['version'] + ".tgz"
 
 default['hops']['install_protobuf']            = "false"
