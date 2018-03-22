@@ -30,9 +30,9 @@ if node['hops']['crl']['input_uri'].empty?
     hopsworks_crl_uri = "Could not access hopsworks-chef"
     if node.attribute?("hopsworks")
       hopsworks_ip = private_recipe_ip("hopsworks", "default")
-      hopsworks_port = "8080"
-      if node['hopsworks'].attribute?(:port)
-        hopsworks_port = node['hopsworks']['port']
+      hopsworks_port = "8181"
+      if node['hopsworks'].attribute?(:secure_port)
+        hopsworks_port = node['hopsworks']['secure_port']
       end
       hopsworks_crl_uri = "https://#{hopsworks_ip}:#{hopsworks_port}/intermediate.crl.pem"
     end
