@@ -324,7 +324,7 @@ default['hops']['hadoop']['ssl']['enabled']['protocols']                = "TLSv1
 
 # CRL validation when RPC TLS is enabled
 default['hops']['crl']['validation_enabled']                            = "true"
-default['hops']['crl']['fetcher']['class']                              = "org.apache.hadoop.security.ssl.RemoteCRLFetcher"
+default['hops']['crl']['fetcher']['class']                              = "org.apache.hadoop.security.ssl.DevRemoteCRLFetcher"
 default['hops']['crl']['input_uri']                                     = ""
 default['hops']['crl']['output_file']                                   = "#{node['hops']['tmp_dir']}/hops_crl.pem"
 default['hops']['crl']['fetcher_interval']                              = "1d"
