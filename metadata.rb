@@ -218,7 +218,7 @@ attribute "hops/crl/validation_enabled",
           :description => "Enable CRL validation when RPC TLS is enabled",
           :type => 'string'
 
-attribute "hops/crl/fetcher/class",
+attribute "hops/crl/fetcher_class",
           :description => "Canonical name of the CRL fetcher class",
           :type => 'string'
 
