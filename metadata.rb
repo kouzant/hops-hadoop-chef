@@ -237,6 +237,14 @@ attribute "hops/rmappsecurity/x509/revocation_monitor_interval",
           :description => "Period to check for stale X509 certificates that should be revoked",
           :type => 'string'
 
+attribute "hops/rmappsecurity/x509/sign-path",
+          :description => "HTTP endpoint to submit application CSR",
+          :type => 'string'
+
+attribute "hops/rmappsecurity/x509/revoke-path",
+          :description => "HTTP endpoint to revoke application X.509",
+          :type => 'string'
+
 attribute "hops/rmappsecurity/jwt/enabled",
           :description => "Enable JWT on Yarn",
           :type => 'string'
@@ -253,8 +261,28 @@ attribute "hops/rmappsecurity/jwt/audience",
           :description => "Comma separated list of JWT audiences",
           :type => 'string'
 
-attribute "hops/rmappsecurity/jwt/master-token-validity",
-          :description => "Validity period for ResourceManager's master service JWT. Valid suffices are s, m, h, d",
+attribute "hops/rmappsecurity/jwt/generate-path",
+          :description => "HTTP endpoint to generate application JWT",
+          :type => 'string'
+
+attribute "hops/rmappsecurity/jwt/invalidate-path",
+          :description => "HTTP endpoint to invalidate application JWT",
+          :type => 'string'
+
+attribute "hops/rmappsecurity/jwt/renew-path",
+          :description => "HTTP endpoint to renew application JWT",
+          :type => 'string'
+
+attribute "hops/jwt-manager/master-token-validity",
+          :description => "Validity period for master service JWT. Valid suffices are s, m, h, d",
+          :type => 'string'
+
+attribute "hops/jwt-manager/renew-path",
+          :description => "HTTP endpoint to renew service JWT",
+          :type => 'string'
+
+attribute "hops/jwt-manager/invalidate-path",
+          :description => "HTTP endpoint to invalidate service JWT",
           :type => 'string'
 
 attribute "hops/tls/crl_enabled",
