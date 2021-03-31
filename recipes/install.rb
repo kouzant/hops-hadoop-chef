@@ -1,7 +1,7 @@
 require 'etc'
 
 include_recipe "hops::_config"
-include_recipe "java"
+# i
 
 if node['hops']['docker']['enabled'].eql?("true")
   include_recipe "hops::docker"

@@ -1,3 +1,3 @@
-include_recipe "java"
+# i
 include_recipe "hops::default"
 
