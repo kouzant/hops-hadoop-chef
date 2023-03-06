@@ -32,7 +32,7 @@ if node['hops']['docker']['cgroup']['enabled'].eql?("true")
         echo #{docker_hard_limit_memory_bytes + excess_memory} > #{docker_memory_cgroup_dir}/memory.limit_in_bytes
         echo #{docker_soft_limit_memory_bytes + excess_memory} > #{docker_memory_cgroup_dir}/memory.soft_limit_in_bytes
     EOH
-    only_if "grep -e \"#{node['hops']['cgroup']['mount-path']}[[:space:]]cgroup2\" /proc/mounts"
+    not_if "grep -e \"#{node['hops']['cgroup']['mount-path']}[[:space:]]cgroup2\" /proc/mounts"
   end
 
   bash "write_cgroup_2" do
